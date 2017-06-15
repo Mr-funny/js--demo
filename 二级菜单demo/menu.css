@@ -1,0 +1,52 @@
+/*一级菜单*/
+nav{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+nav>ul>li{
+float: left;
+width: 100px;
+height: 30px;
+line-height: 30px;
+text-align: center;
+background-color: #696868;
+}
+nav>ul>li a{
+color: #EFDC1B;
+font-size: 16px;
+}
+nav>ul>li:hover ul{
+	display: block;
+}
+nav>ul>li:hover ul li ul{
+	display: none;
+}
+/*二级菜单*/
+nav>ul>li>ul{
+	display: none;
+}
+nav>ul>li>ul>li{
+width: 100px;
+height: 30px;
+line-height: 30px;
+text-align: center;
+background-color: #696868;
+position: relative;
+}
+nav>ul>li>ul>li:hover ul{
+display: block;
+}
+/*三级菜单*/
+nav>ul>li>ul>li>ul{
+	position: absolute;
+	left: 100px;
+	top: 0px;
+	display: none;
+}
+nav>ul>li>ul>li>ul>li{
+width: 100px;
+height: 30px;
+line-height: 30px;
+text-align: center;
+background-color: #696868;
+}
