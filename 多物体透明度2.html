@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多物体动画</title>
+	<style>
+	*{
+		padding: 0;
+		margin:0;
+	}
+		ul li{
+			width: 200px;
+			height: 40px;
+			background-color: yellow;
+			margin-bottom: 20px;
+			list-style: none;
+			font-size: 12px;
+			opacity: 0.3;
+			filter: alpha(opacity:30);
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>fontsize</li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script>
+		window.onload=function(){
+			var lis=document.getElementsByTagName("li");
+			for(var i=0;i<lis.length;i++){
+				lis[i].timer=null;
+				lis[i].onmouseover=function(){
+					startMove(this,100,"opacity");
+				}
+				lis[i].onmouseout=function(){
+					startMove(this,30,"opacity");
+				}
+			}
+		}
+		function startMove(obj,target,attr){
+           	clearInterval(obj.timer);
+         
+           obj.timer=setInterval(function(){
+            var cline;
+			if(attr=="opacity"){
+            cline =parseFloat(getStyle(obj,attr))*100;
+			}else{
+			cline =parseInt(getStyle(obj,attr));
+			}
+           var speed=(target-cline)/8;
+           speed=speed>0?Math.ceil(speed):Math.floor(speed);
+           if(cline==target){
+           	clearInterval(obj.timer); 
+           }else{
+           	if(attr=="opacity"){
+           		obj.style[attr]=(cline+speed)/100;
+           		obj.style.filter="alpha(opacity:"+(cline+speed )+")";
+           	}else{
+           		obj.style[attr]=cline+speed+"px";
+           }
+           	  }
+       },10);
+		}
+		function getStyle(obj,attr){
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}
+			else{
+				return getComputedStyle(obj,false)[attr];
+			}
+		}
+	</script>
+</body>
+</html>

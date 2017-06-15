@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多物体透明度</title>
+	<style>
+		ul li{
+			list-style: none;
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			opacity: 0.3;
+			filter: alpha(opacity:30);
+			float: left;
+			margin-left: 20px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script>
+		window.onload=function(){
+			var lis=document.getElementsByTagName("li");
+			for(var i=0;i<lis.length;i++){
+				lis[i].timer=null;
+				lis[i].alpha=30;
+				lis[i].onmouseover=function(){
+					startMove(this,100);
+				}
+				lis[i].onmouseout=function(){
+					startMove(this,30);
+				}
+			}
+		}
+		function startMove(obj,target){
+           if(obj.timer){
+           	clearInterval(obj.timer)
+           }
+           obj.timer=setInterval(function(){
+           	var speed=(target-obj.alpha)/10;
+           	speed=speed>0?Math.ceil(speed):Math.floor(speed);
+           	if(obj.alpha==target){
+           		clearInterval(obj.timer);
+           	}else{
+           		obj.alpha+=speed;
+           		obj.style.opacity=obj.alpha/100;
+           		obj.style.filter="alpha(opacity:"+obj.alpha+")";
+           	}
+
+           },30)
+		}
+	</script>
+</body>
+</html>
